@@ -1,73 +1,89 @@
-# REXX for z/OS
+# REXX for z/OS — Automation Engineering
 
-Practical laboratory track for learning and progressively applying **REXX on z/OS**, from basic TSO/E EXECs to batch execution and future ISPF-oriented automation.
+Hands-on engineering track for learning and progressively applying **REXX on z/OS**, from TSO/E EXEC fundamentals to batch execution and reusable operational automation.
 
-This repository forms part of the broader **z/OS Engineering Laboratory** and focuses specifically on REXX as an automation and scripting layer around TSO/E, ISPF, JES2 and other z/OS services.
+> **Validated scope:** Labs 01–04
+> **Primary role:** REXX language capability and z/OS automation patterns
+> **Current boundary:** foundational language, decision logic, numeric processing and multiple execution contexts
+> **Architecture:** Portfolio Navigation V2 / Engineering Control
 
-## Purpose
+## Navigate
 
-The objective is not only to learn REXX syntax, but to understand where REXX fits operationally in z/OS.
+- [Lab 01 — REXX Fundamentals and First TSO/E EXEC](labs/01-rexx-fundamentals-first-tso-exec/README.md)
+- [Lab 02 — REXX Execution Methods](labs/02-rexx-execution-methods/README.md)
+- [Lab 03 — Conditional Logic and Multi-Branch Decisions](labs/03-rexx-conditional-logic-multi-branch-decisions/README.md)
+- [Lab 04 — Numeric Processing and Arithmetic Validation](labs/04-rexx-numeric-processing-arithmetic-validation/README.md)
+- [Ecosystem Integration](docs/ECOSYSTEM-INTEGRATION.md)
+- [MVS TSO/ISPF](https://github.com/P-dot/MVS_TSO_ISPF)
+- [JCL Engineering Labs](https://github.com/P-dot/JCL_LABS)
+- [z/OS Batch Scheduler](https://github.com/P-dot/zos-batch-scheduler)
+- [Master z/OS Engineering Laboratory](https://github.com/P-dot/zos-adcd-hercules-engineering-lab)
+- [IBM z/OS Engineering Portfolio](https://github.com/P-dot/P-dot)
 
-The progression starts with simple interactive EXECs and then expands toward different execution environments and, in later labs, reusable automation of repetitive mainframe tasks.
+## Repository Role
+
+This repository owns **REXX language usage and REXX-based automation capability on z/OS**.
 
 ```text
-TSO/E and ISPF
-      |
-      v
+TSO/E + ISPF
+     |
+     v
     REXX
-      |
-      +--> interactive EXECs
-      +--> PDS member execution
-      +--> JES2 batch execution
-      +--> future ISPF services
-      +--> future operational automation
+     |
+     +--> interactive EXECs
+     +--> PDS member execution
+     +--> conditional logic
+     +--> numeric processing
+     +--> JCL / IRXJCL batch execution
+     +--> future dataset and command automation
+     +--> future ISPF services
 ```
 
-## Environment
+REXX is an automation layer. It consumes services provided by other z/OS domains rather than taking ownership of those domains.
 
-Current labs are built and validated on:
+## Validated Labs
 
-- z/OS ADCD 1.11
-- Hercules
-- TSO/E
-- ISPF
-- JES2
-- REXX
+| Lab | Capability | Evidence state |
+| --- | --- | --- |
+| [01](labs/01-rexx-fundamentals-first-tso-exec/README.md) | First TSO/E EXEC, `SAY`, `PULL`, variables and arithmetic | **VALIDATED LOCALLY** |
+| [02](labs/02-rexx-execution-methods/README.md) | ISPF Option 6, PDS `EX`, TSO `EXEC`, JES2 batch through `IRXJCL` | **VALIDATED LOCALLY — RC=0000** |
+| [03](labs/03-rexx-conditional-logic-multi-branch-decisions/README.md) | `IF / THEN / ELSE` and `SELECT / WHEN / OTHERWISE` | **VALIDATED LOCALLY** |
+| [04](labs/04-rexx-numeric-processing-arithmetic-validation/README.md) | Numeric expressions: `+`, `-`, `*`, `/` | **VALIDATED LOCALLY** |
 
-The laboratory uses dedicated REXX and JCL libraries where required.
+## Current Capability Path
 
-## Labs
+```text
+Lab 01: fundamentals / TSO/E
+          |
+          v
+Lab 02: execution contexts
+          |
+          +--> ISPF Option 6
+          +--> PDS EX
+          +--> TSO EXEC
+          +--> JCL / IRXJCL / JES2
+          |
+          v
+Lab 03: conditional decision logic
+          |
+          v
+Lab 04: numeric expression processing
+```
 
-| Lab | Title | Main focus | Status |
-| --- | --- | --- | --- |
-| 01 | [REXX Fundamentals and First TSO/E EXEC](labs/01-rexx-fundamentals-first-tso-exec/) | First REXX EXEC, `SAY`, `PULL`, variables, arithmetic and explicit TSO/E execution | Completed |
-| 02 | [REXX Execution Methods](labs/02-rexx-execution-methods/) | ISPF Option 6, PDS `EX`, TSO execution and JES2 batch execution with `IRXJCL` | Completed / RC=0000 |
+Each lab advances a distinct capability instead of repeating an already validated execution path.
 
-## Lab 01 — Fundamentals and First TSO/E EXEC
+## Validated Execution Contexts
 
-Lab 01 establishes the basic execution model.
+The interactive path is:
 
-A REXX member is stored in a PDS and executed explicitly under TSO/E. The program:
+```text
+TSO/E / ISPF
+     |
+     v
+ REXX EXEC
+```
 
-- requests interactive input with `PULL`;
-- stores values in REXX variables;
-- evaluates an arithmetic expression;
-- displays output with `SAY`.
-
-The validated EXEC performs a simple addition and demonstrates that the REXX environment is correctly installed and usable from TSO/E.
-
-## Lab 02 — Execution Methods
-
-Lab 02 deliberately reuses the EXEC from Lab 01 so that the focus remains on **execution context rather than new language syntax**.
-
-The same EXEC is validated through:
-
-- ISPF Option 6 / TSO Command Shell;
-- the `EX` line command from a PDS member list;
-- explicit TSO `EXEC`;
-- JES2 batch execution through `IRXJCL`.
-
-The batch path introduces the relationship between REXX and JCL:
+Lab 02 also proves non-interactive execution:
 
 ```text
 JCL
@@ -75,127 +91,170 @@ JCL
  v
 IRXJCL
  |
- +--> SYSEXEC   -> locates the REXX EXEC
- +--> SYSTSIN   -> supplies input
- +--> SYSTSPRT  -> captures output
+ +--> SYSEXEC   -> REXX EXEC library
+ +--> SYSTSIN   -> input
+ +--> SYSTSPRT  -> output
  |
  v
 JES2
 ```
 
-The validated batch execution completed with `RC=0000`.
+Observed result: `RUNADD2 - STEP WAS EXECUTED - COND CODE 0000`.
 
-## Current Learning Path
+This proves the REXX batch execution path. General JCL and JES2 engineering remain owned by `JCL_LABS` and the z/OS platform domains.
+
+## Language Capabilities Validated So Far
 
 ```text
-REXX fundamentals
-       |
-       v
-TSO/E interactive execution
-       |
-       v
-ISPF and PDS execution
-       |
-       v
-JES2 / IRXJCL batch execution
-       |
-       v
-control flow and reusable logic
-       |
-       v
-ISPF services and operational automation
+Input / output       SAY, PULL
+Variables            assignment, expression use
+Arithmetic           +, -, *, /
+Decision logic       IF / THEN / ELSE
+                     SELECT / WHEN / OTHERWISE
+Execution            TSO EXEC, ISPF Option 6, PDS EX, IRXJCL batch
 ```
+
+Loops, parsing, functions, `EXECIO`, dataset automation and ISPF services are not presented as completed work.
+
+## Automation Boundary
+
+REXX can implement control logic in other repositories without transferring ownership of that repository's semantics to this one.
+
+A current portfolio example is `zos-batch-scheduler`:
+
+```text
+REXX capability
+      |
+      v
+scheduler implementation
+      |
+      +--> ZSCHVAL
+      +--> ZSCHORD
+      +--> ZSCHEVL
+      |
+      v
+scheduler state / orchestration
+```
+
+Ownership remains:
+
+```text
+REXX language and automation mechanics
+        -> Rexx
+
+scheduler state machine and scheduling semantics
+        -> zos-batch-scheduler
+```
+
+Scheduler capabilities are therefore **validated in the target repository**, not claimed as locally validated REXX labs.
+
+## Domain Relationships
+
+- **MVS_TSO_ISPF** — foundational TSO/E and ISPF environment consumed by REXX.
+- **JCL_LABS** — broader JCL/JES2 batch foundation consumed by the IRXJCL path.
+- **zos-batch-scheduler** — uses REXX as an implementation mechanism; scheduler semantics remain owned there.
+- **Core z/OS Engineering** — provides the ADCD/Hercules platform and common system context.
+
+See [Ecosystem Integration](docs/ECOSYSTEM-INTEGRATION.md) for the detailed ownership and evidence model.
 
 ## Next Development
 
-The next planned progression starts with REXX control-flow concepts already separated from Lab 02:
+Planned distinct REXX capabilities include:
 
-- `IF / THEN / ELSE`
-- `SELECT / WHEN / OTHERWISE`
-
-Later labs can progressively introduce:
-
-- loops and reusable procedures;
-- arguments and parsing;
-- dataset processing;
-- `EXECIO`;
+- loops and `DO`;
+- parsing and arguments;
+- functions and subroutines;
+- dataset processing and `EXECIO`;
 - TSO command automation;
 - ISPF services;
 - reusable operator utilities;
-- integration with other z/OS laboratory tracks where justified.
+- justified cross-repository automation.
 
-These items are roadmap targets and are not presented as completed work.
+These are roadmap targets, not completed capabilities.
 
-## Role in the z/OS Engineering Ecosystem
-
-REXX provides the automation bridge between interactive z/OS operation and repeatable tooling.
-
-Its architectural path in the wider laboratory is:
+## Validation Model
 
 ```text
-MVS / TSO / ISPF
-        |
-        v
-      REXX
-        |
-        v
-ISPF and TSO services
-        |
-        v
-Operational automation
+VALIDATED LOCALLY
+    proven by evidence in this repository
+
+VALIDATED IN TARGET REPOSITORY
+    REXX participates in a capability proven elsewhere
+
+CROSS-DOMAIN / REQUIRES EVIDENCE
+    architecture exists but complete integration is not yet proven
+
+PLANNED
+    roadmap capability, not completed work
 ```
 
-This makes the repository complementary to:
-
-- **MVS_TSO_ISPF** for terminal, TSO/E and ISPF fundamentals;
-- **JCL_LABS** for JES2 and batch execution;
-- **zos-batch-scheduler** for higher-level batch orchestration;
-- the core **z/OS Engineering Laboratory** for system-level operational scenarios.
-
-REXX should automate these environments rather than duplicate their individual subject matter.
-
-## Engineering Methodology
-
-Labs follow the same engineering cycle used across the wider laboratory:
+## Engineering Method
 
 ```text
-Build -> Execute -> Observe -> Diagnose -> Correct -> Validate -> Document
+BUILD -> EXECUTE -> OBSERVE -> DIAGNOSE -> CORRECT -> VALIDATE -> DOCUMENT
 ```
 
-Each completed lab aims to preserve:
+Completed labs preserve the objective, implementation, execution path, observed result, evidence and scope boundary.
 
-- the technical objective;
-- execution steps;
-- relevant source or JCL;
-- observed result;
-- evidence;
-- security/publication review;
-- references where applicable.
+## Architecture V2
+
+Portfolio lifecycle:
+
+```text
+Discover -> Baseline -> Configure -> Operate -> Observe
+        -> Diagnose -> Recover -> Improve -> Automate -> Integrate
+```
+
+Maturity:
+
+```text
+M0 Exploratory -> M1 Foundational -> M2 Operational
+               -> M3 Resilient -> M4 Automated -> M5 Integrated
+```
+
+Integration:
+
+```text
+I0 Standalone -> I1 Cross-component -> I2 Cross-repository -> I3 Production-like
+```
+
+Maturity is capability-scoped. Lab 04 explicitly classifies numeric expression processing as `M1 — Foundational` and `I0 — Standalone`.
 
 ## Repository Structure
 
 ```text
 Rexx/
 ├── README.md
+├── docs/
+│   └── ECOSYSTEM-INTEGRATION.md
 └── labs/
     ├── 01-rexx-fundamentals-first-tso-exec/
-    └── 02-rexx-execution-methods/
+    ├── 02-rexx-execution-methods/
+    ├── 03-rexx-conditional-logic-multi-branch-decisions/
+    └── 04-rexx-numeric-processing-arithmetic-validation/
 ```
 
-Individual labs contain their own detailed README, documentation, evidence, REXX source and supporting JCL where required.
+Each lab owns its detailed technical narrative and evidence. The root README remains the repository landing page.
 
----
+## Publication Security
 
-## Part of the z/OS Engineering Laboratory
+Before publication, review source, JCL, spool output, terminal captures and screenshots for credentials, secrets, private network information, MAC addresses, adapter identifiers, unnecessary hostnames, local workstation paths and terminal/session identifiers.
 
-This repository is a specialized component of the broader **z/OS Engineering Laboratory** built on z/OS ADCD 1.11 / Hercules.
-
-### Master architecture
-
-https://github.com/P-dot/zos-adcd-hercules-engineering-lab
-
-### Engineering methodology
+## Continue Through the Portfolio
 
 ```text
-Build -> Execute -> Observe -> Diagnose -> Correct -> Validate -> Document
+MVS_TSO_ISPF
+      |
+      +------> REXX <------ JCL_LABS
+                  |
+                  +--> operational automation
+                  +--> zos-batch-scheduler
+                  +--> future ISPF / dataset tooling
 ```
+
+- [Ecosystem Integration](docs/ECOSYSTEM-INTEGRATION.md)
+- [MVS TSO/ISPF](https://github.com/P-dot/MVS_TSO_ISPF)
+- [JCL Engineering Labs](https://github.com/P-dot/JCL_LABS)
+- [z/OS Batch Scheduler](https://github.com/P-dot/zos-batch-scheduler)
+- [Master z/OS Engineering Laboratory](https://github.com/P-dot/zos-adcd-hercules-engineering-lab)
+- [IBM z/OS Engineering Portfolio](https://github.com/P-dot/P-dot)
