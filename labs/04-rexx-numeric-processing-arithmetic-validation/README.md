@@ -50,3 +50,12 @@ Division-by-zero handling, controlled exceptions, loops, parsing, functions, dat
 
 ## Next Capability
 Continue with the next distinct capability introduced by the tutorial sequence. New labs should advance an engineering capability rather than duplicate already validated syntax.
+
+
+---
+### Continue learning
+
+**Previous:** [03-rexx-conditional-logic-multi-branch-decisions](../03-rexx-conditional-logic-multi-branch-decisions/)  
+**Course:** [Course home](../../README.md)  
+**Next:** [Choose the next Academy course](https://github.com/P-dot/P-dot/blob/main/docs/COURSES.md)  
+**Academy:** [z/OS Engineering Academy](https://github.com/P-dot/P-dot/blob/main/docs/ACADEMY.md) · [Curriculum](https://github.com/P-dot/P-dot/blob/main/docs/CURRICULUM.md)

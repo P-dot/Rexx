@@ -68,3 +68,12 @@ The evidence demonstrates:
 
 ## Scope
 This lab deliberately remains introductory. Dataset I/O with EXECIO, ISPF services, batch REXX, DB2/DSNREXX and more advanced automation are reserved for later labs.
+
+
+---
+### Continue learning
+
+**Previous:** Course introduction  
+**Course:** [Course home](../../README.md)  
+**Next:** [02-rexx-execution-methods](../02-rexx-execution-methods/)  
+**Academy:** [z/OS Engineering Academy](https://github.com/P-dot/P-dot/blob/main/docs/ACADEMY.md) · [Curriculum](https://github.com/P-dot/P-dot/blob/main/docs/CURRICULUM.md)

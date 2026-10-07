@@ -64,3 +64,12 @@ TSO EXEC 'IBMUSER.REXX.EXEC(LEVEL02)' EXEC
 
 ## Scope boundary
 Loops, `DO`, parsing, functions/subroutines, `EXECIO`, external TSO commands and ISPF services are intentionally deferred to later labs.
+
+
+---
+### Continue learning
+
+**Previous:** [02-rexx-execution-methods](../02-rexx-execution-methods/)  
+**Course:** [Course home](../../README.md)  
+**Next:** [04-rexx-numeric-processing-arithmetic-validation](../04-rexx-numeric-processing-arithmetic-validation/)  
+**Academy:** [z/OS Engineering Academy](https://github.com/P-dot/P-dot/blob/main/docs/ACADEMY.md) · [Curriculum](https://github.com/P-dot/P-dot/blob/main/docs/CURRICULUM.md)

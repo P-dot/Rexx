@@ -85,3 +85,12 @@ The lab proves that the same REXX EXEC can be launched interactively from ISPF/T
 
 ## Scope boundary
 REXX language branching (`IF/THEN/ELSE`, `SELECT/WHEN/OTHERWISE`) is not part of this lab. Work already performed on those concepts continues in Lab 03.
+
+
+---
+### Continue learning
+
+**Previous:** [01-rexx-fundamentals-first-tso-exec](../01-rexx-fundamentals-first-tso-exec/)  
+**Course:** [Course home](../../README.md)  
+**Next:** [03-rexx-conditional-logic-multi-branch-decisions](../03-rexx-conditional-logic-multi-branch-decisions/)  
+**Academy:** [z/OS Engineering Academy](https://github.com/P-dot/P-dot/blob/main/docs/ACADEMY.md) · [Curriculum](https://github.com/P-dot/P-dot/blob/main/docs/CURRICULUM.md)
